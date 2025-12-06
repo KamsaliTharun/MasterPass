@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Register - My App{% endblock %}
+
+{% block content %}
+  <div style="max-width:640px;margin:0 auto">
+    <h2 style="margin-top:0">Create an account</h2>
+    <p class="muted">Fill the details to create a new account.</p>
+
+    <form action="{% url 'register' %}" method="post" class="card" style="margin-top:18px">
+      {% csrf_token %}
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" value="{{ request.POST.username|default:'' }}" autocomplete="username">
+        {% if username_error %}
+          <div class="field-error">{{ username_error }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="new-password">
+          {% if password_error %}
+            <div class="field-error">{{ password_error }}</div>
+          {% endif %}
+          <div class="hint">Minimum 6 characters</div>
+        </div>
+
+        <div class="form-row">
+          <label for="confirm_password">Confirm Password</label>
+          <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password">
+          {% if confirm_password_error %}
+            <div class="field-error">{{ confirm_password_error }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Create account</button>
+        <a class="btn btn-ghost" href="{% url 'login' %}">Already have an account?</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - My App{% endblock %}
+
+{% block content %}
+<div style="text-align:center;padding:36px 12px;">
+    <h2>Welcome to the Home Page</h2>
+    {% if not user.is_authenticated %}
+    <p class="muted">Please explore the features of the application by doing login or registration.</p>
+    {% else %}
+    <p class="muted">You are logged in as {{ user.username }}. Enjoy your stay!</p>
+    {% endif %}
+</div>
+{% endblock %}
+

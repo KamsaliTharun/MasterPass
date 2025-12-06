@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Registered — Redirecting{% endblock %}
+
+{% block content %}
+  <div class="center" style="min-height:160px">
+    <div class="card" style="text-align:center;max-width:520px">
+      <h2 style="margin:0;color:var(--success)">🎉 Account created</h2>
+      <p class="muted" style="margin-top:8px">You will be redirected to the login page shortly.</p>
+      <p style="margin-top:12px"><strong>Redirecting in <span id="counter">3</span>s …</strong></p>
+    </div>
+  </div>
+
+  {% block extra_js %}
+  <script>
+    // countdown + redirect
+    (function(){
+      var sec = 3;
+      var el = document.getElementById('counter');
+      var t = setInterval(function(){
+        sec--;
+        if(el) el.textContent = sec;
+        if(sec <= 0){
+          clearInterval(t);
+          window.location.href = "{% url 'login' %}";
+        }
+      }, 1000);
+    })();
+  </script>
+  {% endblock %}
+{% endblock %}
